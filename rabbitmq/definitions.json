@@ -1,0 +1,97 @@
+{
+   "rabbit_version":"3.6.1",
+   "users":[
+      {
+         "name":"guest",
+         "password_hash":"ykQopXyZn0VY4cuXYI4HaRApjJpJBzK/GQipR9ItsQrUzX5l",
+         "hashing_algorithm":"rabbit_password_hashing_sha256",
+         "tags":"administrator"
+      }
+   ],
+   "vhosts":[
+      {
+         "name":"/"
+      },
+      {
+         "name":"dev"
+      }
+   ],
+   "permissions":[
+
+      {
+         "user":"guest",
+         "vhost":"/",
+         "configure":".*",
+         "write":".*",
+         "read":".*"
+      },
+      {
+         "user":"guest",
+         "vhost":"dev",
+         "configure":".*",
+         "write":".*",
+         "read":".*"
+      }
+   ],
+   "parameters":[
+      
+   ],
+   "policies":[
+      {
+         "vhost":"dev",
+         "name":"ha-all",
+         "pattern":".*",
+         "apply-to":"all",
+         "definition":{
+            "ha-mode":"all"
+         },
+         "priority":0
+      }
+   ],
+   "queues":[
+      {
+         "name":"queue1",
+         "vhost":"dev",
+         "durable":true,
+         "auto_delete":false,
+         "arguments":{
+
+         }
+      },
+      {
+         "name":"queue2",
+         "vhost":"dev",
+         "durable":true,
+         "auto_delete":false,
+         "arguments":{
+            "x-message-ttl":900000
+         }
+      }
+      
+   ],
+      "exchanges":[
+      {
+         "name":"exchange1",
+         "vhost":"dev",
+         "type":"direct",
+         "durable":true,
+         "auto_delete":false,
+         "internal":false,
+         "arguments":{
+
+         }
+      }
+   ],
+   "bindings":[
+      {
+         "source":"queue1",
+         "vhost":"dev",
+         "destination":"exchange1",
+         "destination_type":"queue",
+         "routing_key":"",
+         "arguments":{
+
+         }
+      }
+   ]
+}
